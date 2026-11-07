@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Body Type Calculator – Find Your Shape &amp; Somatotype</title>
+<meta name="description" content="Free body type calculator for women and men: find your body shape from your measurements or take a quick somatotype quiz to see if you are an ectomorph, mesomorph or endomorph.">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Body Type Calculator – Find Your Shape &amp; Somatotype">
+<meta property="og:description" content="Measurements-based body shape result plus a 6-question somatotype quiz, for women and men.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"WebApplication",
+      "name":"Body Type Calculator",
+      "applicationCategory":"LifestyleApplication",
+      "operatingSystem":"Browser",
+      "inLanguage":"en",
+      "description":"Body type calculator with a measurements-based body shape result for women and men and a somatotype quiz for ectomorph, mesomorph and endomorph.",
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+    },
+    {
+      "@type":"FAQPage",
+      "mainEntity":[
+        {"@type":"Question","name":"What is the difference between body type and body shape?","acceptedAnswer":{"@type":"Answer","text":"Body shape describes the outline of your figure, such as hourglass or rectangle, and is calculated from measurements. Body type often refers to somatotype, which describes your build and how easily you gain fat or muscle: ectomorph, mesomorph or endomorph."}},
+        {"@type":"Question","name":"Which body type is best?","acceptedAnswer":{"@type":"Answer","text":"No body type is better than another. Each one simply responds a little differently to training and nutrition, and most people are a mix of two types."}},
+        {"@type":"Question","name":"What body type are most men?","acceptedAnswer":{"@type":"Answer","text":"Rectangle and trapezoid frames are the most common among men. A pronounced inverted triangle usually comes from a combination of naturally broad shoulders and upper-body training."}},
+        {"@type":"Question","name":"Can I change my body type?","acceptedAnswer":{"@type":"Answer","text":"Your bone structure stays the same, but training, nutrition and age can change how much muscle and fat you carry, which can move your measurements and your result over time."}},
+        {"@type":"Question","name":"How accurate is the somatotype quiz?","acceptedAnswer":{"@type":"Answer","text":"The quiz gives a general tendency based on self-assessment. A formal somatotype assessment, such as the Heath-Carter method, uses skinfolds, bone widths and girths measured by a trained professional."}},
+        {"@type":"Question","name":"Is my data stored?","acceptedAnswer":{"@type":"Answer","text":"No. All calculations happen in your browser and nothing you enter is sent or saved."}}
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <a href="#" class="brand" aria-label="Body Type Calculator home">
+      <span class="brand-ic" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span>bodytype<b>.calc</b></span>
+    </a>
+    <button class="burger" aria-label="Menu" onclick="document.querySelector('.menu').classList.toggle('open')"><span></span><span></span></button>
+    <nav class="menu">
+      <a href="#" class="now">Calculator</a>
+      <a href="#somatotypes">Somatotypes</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-in">
+    <p class="over">For women &amp; men · 2 ways to find out</p>
+    <h1>What’s your body type?<span>Measure it – or take the quiz.</span></h1>
+    <p class="hero-lead">This free <a href="https://bodytypecalcs.com/">Body Type Calculator</a> works two ways: enter your measurements to get your body shape, or answer six quick questions to discover whether your build leans ectomorph, mesomorph or endomorph.</p>
+  </div>
+</section>
+
+<main class="wrap">
+  <section class="tool" id="calculator">
+    <div class="modes" role="tablist">
+      <button class="mode on" data-m="mode-measure" role="tab"><span>01</span>By measurements<small>Body shape · 2 min</small></button>
+      <button class="mode" data-m="mode-quiz" role="tab"><span>02</span>Somatotype quiz<small>6 questions · 1 min</small></button>
+    </div>
+
+    <!-- ========== MEASUREMENTS ========== -->
+    <div class="pane on" id="mode-measure">
+      <div class="pane-grid">
+        <div class="left">
+          <p class="step">Step 1 · Who are you measuring?</p>
+          <div class="who" id="who">
+            <button type="button" data-v="f" class="on">
+              <svg viewBox="0 0 40 60" width="34" height="50" aria-hidden="true"><circle cx="20" cy="8" r="6"/><path d="M12 18h16l-3 14 6 22H9l6-22z"/></svg>
+              Woman
+            </button>
+            <button type="button" data-v="m">
+              <svg viewBox="0 0 40 60" width="34" height="50" aria-hidden="true"><circle cx="20" cy="8" r="6"/><path d="M8 18h24l-4 18v20H12V36z"/></svg>
+              Man
+            </button>
+          </div>
+
+          <p class="step">Step 2 · Your measurements <span class="units" id="units"><button type="button" data-v="in" class="on">in</button><button type="button" data-v="cm">cm</button></span></p>
+          <div class="inputs">
+            <label><span id="lb-top">Bust</span><input type="number" id="v-top" value="35" min="0" step="0.1" inputmode="decimal"><em class="u">in</em></label>
+            <label><span>Waist</span><input type="number" id="v-waist" value="28" min="0" step="0.1" inputmode="decimal"><em class="u">in</em></label>
+            <label id="row-hh"><span>High hip</span><input type="number" id="v-hh" value="34" min="0" step="0.1" inputmode="decimal"><em class="u">in</em></label>
+            <label><span>Hips</span><input type="number" id="v-hip" value="38" min="0" step="0.1" inputmode="decimal"><em class="u">in</em></label>
+          </div>
+          <p class="mhint" id="mhint">Measure the fullest part of the bust, the narrowest waist, the high hip about 7 in below the waist and the widest part of the hips.</p>
+          <button class="run" id="run">Show my body type →</button>
+          <p class="err" id="err" role="alert"></p>
+        </div>
+
+        <div class="out" aria-live="polite">
+          <p class="step light">Step 3 · Your result</p>
+          <div class="out-head">
+            <div class="glyph" id="glyph"></div>
+            <div>
+              <h2 id="o-name">Bottom Hourglass</h2>
+              <p id="o-sub">Female body shape</p>
+            </div>
+          </div>
+          <p class="o-desc" id="o-desc"></p>
+          <div class="o-nums">
+            <div><span>Waist ÷ hips</span><b id="o-whr">0.74</b><em id="o-whr-t"></em></div>
+            <div><span id="o-r2-l">Bust − hips</span><b id="o-r2">−3.0 in</b></div>
+            <div><span id="o-r3-l">Hips − waist</span><b id="o-r3">10.0 in</b></div>
+          </div>
+          <div class="o-tips">
+            <h3>Wardrobe ideas</h3>
+            <ul id="o-tips"></ul>
+          </div>
+          <button class="o-copy" id="o-copy">Copy result</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== QUIZ ========== -->
+    <div class="pane" id="mode-quiz">
+      <div class="pane-grid">
+        <div class="left">
+          <div class="q-progress"><i id="q-bar"></i></div>
+          <p class="step" id="q-count">Question 1 of 6</p>
+          <h3 class="q-title" id="q-title"></h3>
+          <div class="q-opts" id="q-opts"></div>
+          <div class="q-nav">
+            <button type="button" class="ghost" id="q-back">← Back</button>
+            <button type="button" class="ghost" id="q-restart">Restart</button>
+          </div>
+        </div>
+        <div class="out" aria-live="polite">
+          <p class="step light">Your somatotype</p>
+          <h2 id="s-name">Answer the questions</h2>
+          <p class="o-desc" id="s-desc">Your result updates with every answer. Most people are a blend of two types.</p>
+          <div class="soma" id="s-bars">
+            <div><span>Ectomorph</span><i><s id="b-ecto"></s></i><b id="p-ecto">0%</b></div>
+            <div><span>Mesomorph</span><i><s id="b-meso"></s></i><b id="p-meso">0%</b></div>
+            <div><span>Endomorph</span><i><s id="b-endo"></s></i><b id="p-endo">0%</b></div>
+          </div>
+          <div class="o-tips">
+            <h3>Training focus</h3>
+            <ul id="s-tips"><li>Finish the quiz to see tips for your type.</li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BODY TYPE VS SHAPE ========== -->
+  <section class="sec">
+    <p class="kick">Terms explained</p>
+    <h2>Body type, body shape and somatotype – what’s the difference?</h2>
+    <div class="trio">
+      <article><b>Body shape</b><p>The outline of your figure – hourglass, pear, rectangle and so on. It is calculated from circumference measurements and is mainly used in fashion and pattern-making.</p></article>
+      <article><b>Somatotype</b><p>A model from the 1940s that groups builds into ectomorph (lean), mesomorph (muscular) and endomorph (rounder). Today it is used loosely in fitness to describe how a body tends to respond to training.</p></article>
+      <article><b>Body type</b><p>An everyday umbrella term. Depending on who uses it, it can mean either of the above – which is why this calculator offers both.</p></article>
+    </div>
+  </section>
+
+  <!-- ========== MEN ========== -->
+  <section class="sec split">
+    <div>
+      <p class="kick">For men</p>
+      <h2>Male body types and the shoulder-to-waist ratio</h2>
+      <p>For men, the most telling number is how much wider the shoulders are than the waist. Measure your shoulder circumference around the widest point of the deltoids and divide it by your waist. A higher ratio means a stronger V-taper.</p>
+      <p>The male mode above sorts you into one of five frames. If you want more detail, including chest-based measurements and type-specific advice, use the dedicated <a href="https://bodytypecalcs.com/body-type-calculator-male/">body type calculator for men</a>.</p>
+    </div>
+    <div class="ratio">
+      <div class="ratio-row"><span>Oval</span><p>Waist is the widest measurement</p><b>waist ≥ hips</b></div>
+      <div class="ratio-row"><span>Triangle</span><p>Hips wider than shoulders</p><b>hips &gt; shoulders</b></div>
+      <div class="ratio-row"><span>Rectangle</span><p>Little taper from shoulders to waist</p><b>&lt; 1.20</b></div>
+      <div class="ratio-row"><span>Trapezoid</span><p>Balanced, moderate V-taper</p><b>1.20 – 1.39</b></div>
+      <div class="ratio-row"><span>Inverted triangle</span><p>Strong V-taper</p><b>≥ 1.40</b></div>
+    </div>
+  </section>
+
+  <!-- ========== SOMATOTYPES ========== -->
+  <section class="sec" id="somatotypes">
+    <p class="kick">The three somatotypes</p>
+    <h2>Ectomorph, mesomorph and endomorph</h2>
+    <p class="lead">Few people are a pure type. Think of the three as ends of a triangle – the quiz shows where you sit between them.</p>
+    <div class="types">
+      <article class="t-ecto"><div class="t-ic"></div><h3>Ectomorph</h3><p>Long limbs, narrow shoulders and hips, small joints. Often finds it hard to gain weight or muscle.</p><ul><li>Prioritise strength training with compound lifts</li><li>Keep cardio moderate</li><li>Eat regular, sufficient meals</li></ul></article>
+      <article class="t-meso"><div class="t-ic"></div><h3>Mesomorph</h3><p>Medium bone structure, broader shoulders and a naturally athletic look. Builds muscle relatively easily.</p><ul><li>Mix strength and conditioning</li><li>Vary training to keep progressing</li><li>Recovery matters as much as effort</li></ul></article>
+      <article class="t-endo"><div class="t-ic"></div><h3>Endomorph</h3><p>Wider frame, larger joints and a softer, rounder build. Tends to store energy more easily.</p><ul><li>Combine strength training with regular activity</li><li>Daily movement like walking adds up</li><li>Focus on consistency over intensity</li></ul></article>
+    </div>
+  </section>
+
+  <!-- ========== MISTAKES ========== -->
+  <section class="sec">
+    <p class="kick">Better results</p>
+    <h2>Five measuring mistakes that change your result</h2>
+    <ol class="mist">
+      <li><b>Measuring over thick clothes.</b> Jeans or a jumper can add an inch or more – measure over underwear or thin fabric.</li>
+      <li><b>Pulling the tape tight.</b> The tape should lie flat against the skin without pressing in.</li>
+      <li><b>Holding your breath.</b> Breathe out normally before you read the waist number.</li>
+      <li><b>A tilted tape.</b> Use a mirror to check the tape is level all the way around.</li>
+      <li><b>Guessing the high hip.</b> It sits about 7 inches (18 cm) below the natural waist, across the top of the hip bones.</li>
+    </ol>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section class="sec">
+    <p class="kick">FAQ</p>
+    <h2>Questions about the body type calculator</h2>
+    <div class="faq">
+      <details open><summary>What is the difference between body type and body shape?</summary><p>Body shape describes the outline of your figure, such as hourglass or rectangle, and is calculated from measurements. Body type often refers to somatotype, which describes your build and how easily you gain fat or muscle: ectomorph, mesomorph or endomorph.</p></details>
+      <details><summary>Which body type is best?</summary><p>No body type is better than another. Each one simply responds a little differently to training and nutrition, and most people are a mix of two types.</p></details>
+      <details><summary>What body type are most men?</summary><p>Rectangle and trapezoid frames are the most common among men. A pronounced inverted triangle usually comes from a combination of naturally broad shoulders and upper-body training.</p></details>
+      <details><summary>Can I change my body type?</summary><p>Your bone structure stays the same, but training, nutrition and age can change how much muscle and fat you carry, which can move your measurements and your result over time.</p></details>
+      <details><summary>How accurate is the somatotype quiz?</summary><p>The quiz gives a general tendency based on self-assessment. A formal somatotype assessment, such as the Heath-Carter method, uses skinfolds, bone widths and girths measured by a trained professional.</p></details>
+      <details><summary>Is my data stored?</summary><p>No. All calculations happen in your browser and nothing you enter is sent or saved.</p></details>
+    </div>
+  </section>
+</main>
+
+<footer class="ft" id="contact">
+  <div class="wrap ft-in">
+    <div>
+      <span class="brand light">bodytype<b>.calc</b></span>
+      <p>Body shape and somatotype in one free tool – private, fast and for everyone.</p>
+    </div>
+    <nav>
+      <a href="#calculator">Calculator</a>
+      <a href="#somatotypes">Somatotypes</a>
+      <a href="#">Contact</a>
+      <a href="#">Privacy</a>
+      <a href="#">Imprint</a>
+    </nav>
+  </div>
+  <p class="wrap ft-copy">© <span id="yr"></span> bodytype.calc · General information only, not medical or fitness advice.</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  function toast(t){ var e=$('toast'); e.textContent=t; e.classList.add('show'); clearTimeout(e._t); e._t=setTimeout(function(){e.classList.remove('show');},1800); }
+
+  /* Modes */
+  document.querySelectorAll('.mode').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.mode').forEach(function(x){x.classList.toggle('on',x===b);});
+      document.querySelectorAll('.pane').forEach(function(p){p.classList.toggle('on',p.id===b.dataset.m);});
+    });
+  });
+
+  /* ---------- Measurements ---------- */
+  var sex='f', unit='in';
+  var F={
+    hourglass:['Hourglass','Bust and hips are almost equal and the waist is clearly smaller – a balanced, curved outline.',['Wrap dresses and belted coats','Fitted knitwear instead of boxy cuts','High-waisted, straight trousers']],
+    bhourglass:['Bottom Hourglass','A well-defined waist with hips a little fuller than the bust.',['Detailed or structured tops','Fit-and-flare dresses','Bootcut or straight-leg jeans']],
+    thourglass:['Top Hourglass','A well-defined waist with a bust a little fuller than the hips.',['V-necks and wrap tops','A-line and flared skirts','Belts at the natural waist']],
+    spoon:['Spoon','Hips clearly wider than the bust with a rounded high hip that forms a gentle shelf.',['Peplum tops and belts','Boat or wide necklines','A-line skirts over the high hip']],
+    triangle:['Triangle (Pear)','Hips wider than the bust and a softer waistline.',['Colour and detail on top','Dark straight or wide trousers','Jackets ending at the hip']],
+    inverted:['Inverted Triangle','Shoulders and bust are broader than the hips.',['Simple V-neck tops','Wide-leg trousers and full skirts','Skip puffed or padded shoulders']],
+    apple:['Apple','The midsection is the fullest part, often with slimmer limbs.',['Empire lines and flowing tops','Straight or tapered trousers','Open jackets and long cardigans']],
+    rectangle:['Rectangle','Bust, waist and hips are similar for a straight, sporty line.',['Belts and wrap styles to shape the waist','Ruffles or volume at bust and hem','Layering for dimension']]
+  };
+  var M={
+    trapezoid:['Trapezoid','Shoulders broader than the waist with a moderate, balanced taper.',['Tailored shirts and jackets','Straight-leg trousers','Most cuts work – focus on fit']],
+    inverted:['Inverted Triangle','A strong V-taper: very broad shoulders and a narrow waist.',['Relaxed or straight trousers','Open collars and V-necks','Avoid shoulder-heavy details']],
+    rectangle:['Rectangle','Shoulders, waist and hips are close in width.',['Structured blazers add shoulder line','Layer textures for depth','Tapered trousers for a V-effect']],
+    triangle:['Triangle','Hips are wider than the shoulders.',['Structured shoulders and horizontal stripes on top','Dark, straight trousers','Avoid very skinny leg fits']],
+    oval:['Oval','The waist is the widest measurement.',['Vertical lines and single-breasted jackets','Fabrics that drape, not cling','Straight, mid-rise trousers']]
+  };
+  function ffit(b,w,hh,h){
+    if(b-h<=1 && h-b<3.6 && (b-w>=9 || h-w>=10)) return 'hourglass';
+    if(h-b>=3.6 && h-b<10 && h-w>=9 && hh/w<1.193) return 'bhourglass';
+    if(b-h>1 && b-h<10 && b-w>=9) return 'thourglass';
+    if(h-b>2 && h-w>=7 && hh/w>=1.193) return 'spoon';
+    if(h-b>=3.6 && h-w<9) return 'triangle';
+    if(b-h>=3.6 && b-w<9) return 'inverted';
+    if(w>=h && w>=b-2) return 'apple';
+    return 'rectangle';
+  }
+  function male(s,w,h){
+    if(w>=h && w>=s*0.9) return 'oval';
+    if(h-s>=1) return 'triangle';
+    if(s/w>=1.4) return 'inverted';
+    if(s/w>=1.2) return 'trapezoid';
+    return 'rectangle';
+  }
+  var GLYPH={
+    hourglass:'M10 8h40L34 40l16 32H10l16-32z', bhourglass:'M14 8h32L34 40l18 32H8l18-32z', thourglass:'M8 8h44L34 40l12 32H14l12-32z',
+    spoon:'M16 8h28L35 34q20 18 17 38H8Q5 52 25 34z', triangle:'M22 8h16l16 64H6z', inverted:'M6 8h48L38 72H22z',
+    apple:'M18 8h24q16 32 0 64H18q-16-32 0-64z', rectangle:'M14 8h32v64H14z', trapezoid:'M6 8h48l-10 64H16z', oval:'M22 8h16q20 32 0 64H22q-20-32 0-64z'
+  };
+  function fmt(x){ return (x<0?'−':'')+Math.abs(x).toFixed(1); }
+  var mText='';
+  function measure(scroll){
+    var k=unit==='cm'?1/2.54:1;
+    var t=parseFloat($('v-top').value)*k, w=parseFloat($('v-waist').value)*k, hh=parseFloat($('v-hh').value)*k, h=parseFloat($('v-hip').value)*k;
+    var req=sex==='f'?[t,w,hh,h]:[t,w,h];
+    if(req.some(function(x){return !(x>0);})){ $('err').textContent='Please enter all measurements.'; return; }
+    $('err').textContent='';
+    var key=sex==='f'?ffit(t,w,hh,h):male(t,w,h);
+    var d=(sex==='f'?F:M)[key];
+    $('o-name').textContent=d[0];
+    $('o-sub').textContent=sex==='f'?'Female body shape':'Male body type';
+    $('o-desc').textContent=d[1];
+    $('o-tips').innerHTML=d[2].map(function(x){return '<li>'+x+'</li>';}).join('');
+    $('glyph').innerHTML='<svg viewBox="0 0 60 80"><path d="'+GLYPH[key]+'"/></svg>';
+    var whr=w/h, lim=sex==='f'?0.85:0.90, uf=unit==='cm'?2.54:1, un=' '+unit;
+    $('o-whr').textContent=whr.toFixed(2);
+    $('o-whr-t').textContent=whr<lim?'below WHO threshold':'at/above WHO threshold';
+    $('o-whr-t').className=whr<lim?'ok':'hi';
+    if(sex==='f'){
+      $('o-r2-l').textContent='Bust − hips'; $('o-r2').textContent=fmt((t-h)*uf)+un;
+      $('o-r3-l').textContent='Hips − waist'; $('o-r3').textContent=fmt((h-w)*uf)+un;
+    } else {
+      $('o-r2-l').textContent='Shoulder ÷ waist'; $('o-r2').textContent=(t/w).toFixed(2);
+      $('o-r3-l').textContent='Shoulders − hips'; $('o-r3').textContent=fmt((t-h)*uf)+un;
+    }
+    mText='My body type: '+d[0]+' (waist-to-hip ratio '+whr.toFixed(2)+')';
+    if(scroll && window.innerWidth<900) document.querySelector('#mode-measure .out').scrollIntoView({behavior:'smooth'});
+  }
+  function setDefaults(){
+    var c=unit==='cm'?2.54:1, v=sex==='f'?[35,28,34,38]:[46,34,0,38];
+    ['v-top','v-waist','v-hh','v-hip'].forEach(function(id,i){ if(v[i]) $(id).value=Math.round(v[i]*c*10)/10; });
+  }
+  document.querySelectorAll('#who button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('#who button').forEach(function(x){x.classList.toggle('on',x===b);});
+      sex=b.dataset.v;
+      $('row-hh').style.display=sex==='f'?'':'none';
+      $('lb-top').textContent=sex==='f'?'Bust':'Shoulders';
+      $('mhint').textContent=sex==='f'
+        ?'Measure the fullest part of the bust, the narrowest waist, the high hip about 7 in below the waist and the widest part of the hips.'
+        :'Measure around the widest point of the shoulders, your natural waist and the widest part of the hips.';
+      setDefaults(); measure(false);
+    });
+  });
+  document.querySelectorAll('#units button').forEach(function(b){
+    b.addEventListener('click',function(){
+      if(b.dataset.v===unit) return;
+      var f=b.dataset.v==='cm'?2.54:1/2.54;
+      ['v-top','v-waist','v-hh','v-hip'].forEach(function(id){ var x=parseFloat($(id).value); if(x>0) $(id).value=Math.round(x*f*10)/10; });
+      unit=b.dataset.v;
+      document.querySelectorAll('#units button').forEach(function(x){x.classList.toggle('on',x===b);});
+      document.querySelectorAll('.u').forEach(function(u){u.textContent=unit;});
+      measure(false);
+    });
+  });
+  $('run').addEventListener('click',function(){measure(true);});
+  ['v-top','v-waist','v-hh','v-hip'].forEach(function(id){ $(id).addEventListener('keydown',function(e){ if(e.key==='Enter') measure(true); }); });
+  $('o-copy').addEventListener('click',function(){
+    var done=function(){toast('Result copied');};
+    if(navigator.clipboard&&window.isSecureContext){ navigator.clipboard.writeText(mText).then(done); return; }
+    var a=document.createElement('textarea'); a.value=mText; document.body.appendChild(a); a.select(); try{document.execCommand('copy');done();}catch(e){} a.remove();
+  });
+
+  /* ---------- Somatotype quiz ---------- */
+  var Q=[
+    ['Wrap your thumb and middle finger around your opposite wrist. What happens?',['They overlap easily','They just touch','They don’t meet']],
+    ['How would you describe your natural frame?',['Narrow and long','Medium with broad shoulders','Wide and solid']],
+    ['When you eat more than usual for a few weeks…',['I barely gain anything','I gain a little, mostly evenly','I gain quickly, often around the middle']],
+    ['When you start strength training…',['Muscle comes slowly','Muscle comes fairly quickly','I get strong but look softer']],
+    ['Compared with your hips, your shoulders are…',['About the same, both narrow','Clearly wider','About the same, both wide']],
+    ['Your energy and appetite during the day are…',['High energy, often forget to eat','Steady and balanced','Lower energy, appetite comes easily']]
+  ];
+  var TYPES=['ecto','meso','endo'];
+  var INFO={
+    ecto:['Ectomorph','Your answers point to a lean, long-limbed build that gains weight and muscle slowly.',['Focus on heavy compound lifts 3–4× a week','Keep cardio short and moderate','Plan regular, satisfying meals']],
+    meso:['Mesomorph','Your answers point to an athletic build that responds quickly to training.',['Combine strength and conditioning','Change programmes every few weeks','Prioritise sleep and recovery']],
+    endo:['Endomorph','Your answers point to a solid, wider frame that stores energy easily.',['Pair strength training with daily movement','Short, regular activity beats occasional long sessions','Build habits you can keep']]
+  };
+  var ans=[], qi=0;
+  function renderQ(){
+    if(qi>=Q.length){ $('q-title').textContent='All done – here is your result.'; $('q-opts').innerHTML='<button type="button" class="q-again" id="q-again">Take the quiz again</button>'; $('q-again').addEventListener('click',restart); $('q-count').textContent='Completed'; $('q-bar').style.width='100%'; return; }
+    $('q-count').textContent='Question '+(qi+1)+' of '+Q.length;
+    $('q-bar').style.width=(qi/Q.length*100)+'%';
+    $('q-title').textContent=Q[qi][0];
+    $('q-opts').innerHTML=Q[qi][1].map(function(o,i){ return '<button type="button" class="q-opt'+(ans[qi]===i?' on':'')+'" data-i="'+i+'"><b>'+'ABC'[i]+'</b>'+o+'</button>'; }).join('');
+    $('q-opts').querySelectorAll('.q-opt').forEach(function(b){ b.addEventListener('click',function(){ ans[qi]=+b.dataset.i; qi++; renderQ(); score(); }); });
+  }
+  function score(){
+    var c=[0,0,0], n=0;
+    ans.forEach(function(a){ if(a!==undefined){ c[a]++; n++; } });
+    TYPES.forEach(function(t,i){ var p=n?Math.round(c[i]/n*100):0; $('b-'+t).style.width=p+'%'; $('p-'+t).textContent=p+'%'; });
+    if(!n){ $('s-name').textContent='Answer the questions'; $('s-desc').textContent='Your result updates with every answer. Most people are a blend of two types.'; $('s-tips').innerHTML='<li>Finish the quiz to see tips for your type.</li>'; return; }
+    var max=Math.max.apply(null,c), top=TYPES.filter(function(t,i){return c[i]===max;});
+    var info=INFO[top[0]];
+    $('s-name').textContent=top.length>1?top.map(function(t){return INFO[t][0];}).join(' / '):info[0];
+    $('s-desc').textContent=top.length>1?'You are an even blend of these types – a very common result.':info[1];
+    $('s-tips').innerHTML=(n<Q.length?'<li>Keep going – '+(Q.length-n)+' question'+(Q.length-n>1?'s':'')+' left.</li>':'')+info[2].map(function(x){return '<li>'+x+'</li>';}).join('');
+  }
+  function restart(){ ans=[]; qi=0; renderQ(); score(); }
+  $('q-back').addEventListener('click',function(){ if(qi>0){ qi--; renderQ(); } });
+  $('q-restart').addEventListener('click',restart);
+
+  document.querySelectorAll('.menu a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('.menu').classList.remove('open');});});
+  $('yr').textContent=new Date().getFullYear();
+  measure(false); renderQ(); score();
+})();
+</script>
+</body>
+</html>
